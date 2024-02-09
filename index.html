@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+	<link rel="icon" type="image/png" href="favicon.png">
+	<title>TR-12</title>
+	<style>
+		html { font-size: 10.5px; }
+		@media (min-width: 240px) and (max-width: 1200px) {
+			html {
+				font-size: calc(10.5px + (28 - 10.5) * ((100vw - 240px) / (1200 - 240)));
+			}
+		}
+		@media (min-width: 1200px) {
+			html { font-size: 28px; }
+		}
+		body { margin: 0; color: #efeff1; background:#0e0e10; font-family: Arial, Sans-serif; line-height: 1.4; text-shadow: 3px 10px 15px #000, 3px 10px 15px #000; }
+		body { image-rendering: pixelated; background: url(bg.png) repeat 50% 0/1680px auto; }
+		a[href],a[href]:link,a[href]:visited { color: #bf94ff; text-decoration: none; }
+		a[href]:hover,a[href]:active { color: #5f6; }
+		a[href]:hover { text-decoration: underline; }
+		a:target { color: limegreen; }
+		img {
+			max-width: 100%;
+			image-rendering: auto;
+			height: auto !important;
+			background: #0C0C0C url(data:image/gif;base64,R0lGODlhKwALAPEAAAAAAP///3x8fP///yH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAKwALAAACMoSOCMuW2diD88UKG95W88uF4DaGWFmhZid93pq+pwxnLUnXh8ou+sSz+T64oCAyTBUAACH5BAkKAAAALAAAAAArAAsAAAI9xI4IyyAPYWOxmoTHrHzzmGHe94xkmJifyqFKQ0pwLLgHa82xrekkDrIBZRQab1jyfY7KTtPimixiUsevAAAh+QQJCgAAACwAAAAAKwALAAACPYSOCMswD2FjqZpqW9xv4g8KE7d54XmMpNSgqLoOpgvC60xjNonnyc7p+VKamKw1zDCMR8rp8pksYlKorgAAIfkECQoAAAAsAAAAACsACwAAAkCEjgjLltnYmJS6Bxt+sfq5ZUyoNJ9HHlEqdCfFrqn7DrE2m7Wdj/2y45FkQ13t5itKdshFExC8YCLOEBX6AhQAADsAAAAAAAAAAAA=) 50% 50%/43px 11px no-repeat;
+			box-shadow: 3px 10px 15px #000, 3px 10px 15px #000;
+		}
+		hr { border: 3px solid rgba(0, 0, 0, 0.05); border-radius: 0.5em; margin: 3em 0; }
+		h1 {
+			margin-top: 0;
+			font-size: calc(0.8rem);
+			text-transform: uppercase;
+		}
+		h1 a {
+			display: block;
+			color: #EEE !important;
+			text-align: center;
+		}
+		h1 img {
+			display: block;
+			margin: 0 auto 2em auto;
+		}
+		code { color: #6c6; background: #080F08; }
+		html::-webkit-scrollbar { width: 16px; height: 16px; }
+		html::-webkit-scrollbar-thumb { background: #426; border-radius: 16px; box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25); }
+		html::-webkit-scrollbar-track { background: #181122; }
+		.wrapper {
+			max-width: 29em;
+			margin: 0 auto;
+			padding: 2em 1em;
+			position: relative;
+		}
+		div#extra {
+			z-index: 1;
+			position: fixed; 
+			top: 0;
+			width: 100%;
+			height: 100vh;
+			pointer-events: none;
+		}
+		div.toolbar {
+			position: absolute;
+			right: -2.3em;
+			top: 50%;
+			margin-top: -4em;
+			pointer-events: all;
+		}
+
+		div.toolbar { right: -0.3em; }
+		@media (min-width: 320px) and (max-width: 1200px) {
+			div.toolbar {
+				right: calc(-0.3em + (-2.3 * 24) * ((100vw - 320px) / (1200 - 320)));
+			}
+		}
+		@media (min-width: 1200px) {
+			div.toolbar { right: -2.3em; }
+		}
+
+		div.toolbar > button {
+			display: block;
+			width: 2em;
+			height: 2em;
+			padding: 0.2em 0.4em;
+			border-radius: 0.2em;
+			background: rgba(15, 13, 22,0.8);
+			color: #eee;
+			font-size: 2rem;
+			border: none;
+			margin: 0.2em;
+			border-width: 2px;
+			border-left: 2px solid #5A4587;
+			border-bottom: 2px solid #5A4587;
+			border-top: 2px solid #9370DB;
+			border-right: 2px solid #9370DB;
+			border-image: initial;
+			background-blend-mode: soft-light;
+			box-shadow: 10px -3px 15px #000, 10px -3px 15px #000;
+			line-height: 1;
+
+			background-position: 50% 50%;
+			background-size: auto 0.65em;
+			background-repeat: no-repeat;
+			max-width: 3rem;
+			max-height: 3rem;
+		}
+		div.toolbar > button:hover,
+		div.toolbar > button:active {
+			background-color: rgba(27, 43, 30, 0.8);
+			background-blend-mode: unset;
+
+			border-left: 2px solid #008533;
+			border-bottom: 2px solid #008533;
+			border-top: 2px solid #24dd52;
+			border-right: 2px solid #24dd52;
+			color: #5f6;
+		}
+		div.toolbar > button:hover {
+			transform: scale(1.05);
+			transition-duration: 0.05s;
+			transition-property: transform;
+		}
+		div.toolbar > button:active {
+			transform: scale(1);
+		}
+		div.toolbar > button.forward { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6M0Y4Nzk4N0Q3ODZCMTFFRUE0NkZCREYxMTA4RkU4QkUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6M0Y4Nzk4N0U3ODZCMTFFRUE0NkZCREYxMTA4RkU4QkUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDozRjg3OTg3Qjc4NkIxMUVFQTQ2RkJERjExMDhGRThCRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozRjg3OTg3Qzc4NkIxMUVFQTQ2RkJERjExMDhGRThCRSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PozYGokAAAAGUExURf///////1V89WwAAAACdFJOU/8A5bcwSgAAAg9JREFUeNrsmkFywzAMA4H/f7ofsGSRWMY9KGcKu5O6Sgah/PFLV+AKXIErcAX+o4BmrJ5j9TQ4YrCI1ePggMEqVs+DuMEyVotB2GAdq9UgarCJ1XIQNNjFaj2IGWxjtRmEDPax2g0iBi+x2g4CBm+xbwIa4VcENMHX8TMQGhxEyoMGJ4HynMFRnDxmcBYmTxkcRslDBqdB8ozBcYw8YnAeIk8YFCLkAYNKgMwblI7LuEHtsEwbFI/KsEH1oMwalI/JqEH9kMiw1hH07Wy8aSIf6NYfDbxSWo+tuEu9+W+Dfaw2Lw5BF0v/4oK+WravbiGXe/LRcVBnvcYffv/tt2QvgFN+0JJtEef8oCXbQCr8oCVbYmr8oCVT7TXQkkH8oCWD+EFLBvGDlgziBy0ZxA9aMogftGQMP2nJYH6jJWP5nZYM5bdaMpLfa8lAfrMl4/jdlgzjt1syit9vySB+0JIx/KQlQ/hRS0bws5YM4IctWc5PW7KYf1uy25Ldluy2ZLclM/IjTPIT09kQ0ZIlAkRLlgnkLVkqkLZkuUDWkhECnuFXdkpH+CZ+lI9WDWrDPN/MYkSw7FEdp/mmllPa6zb1Ayzf3IJQc+Gpc4Tkm1zSaq2c9Q6RK2/GDPxDAWN8Y8uK/rGAsbVPIwb+QMDQ4q0BA38kYGT12bGBPxQwsHzuj19X4ApcgStwBT4X+BNgAGaqLXflRkilAAAAAElFTkSuQmCC); }
+		div.toolbar > button.backward { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUExRjY0NkI3ODZDMTFFRTkxMTFDMUU0MkFCNDY4MTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUExRjY0NkM3ODZDMTFFRTkxMTFDMUU0MkFCNDY4MTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QTFGNjQ2OTc4NkMxMUVFOTExMUMxRTQyQUI0NjgxNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QTFGNjQ2QTc4NkMxMUVFOTExMUMxRTQyQUI0NjgxNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pta8Sx0AAAAGUExURf///////1V89WwAAAACdFJOU/8A5bcwSgAAAdRJREFUeNrs2NtKxEAYBOHK+7+0iIhHcKa7/gRh9lImW9/iHkJzPfzgAA7gAA7gAP45AHgUALWAul8K6PudAKFfCTD6jQClXwhw+rkAqR8LsPqpAK0fCvD6mQCxHwkw+4kAtR8IcPv7AuT+tgC7vytA728K8Pt7Agb6WwIm+jsCRvobAsr+1Qoo+1croO23Aup+KaDvdwKEfiXA6DcClH4hwOnnAqR+LMDqpwK0fijA62cCLvPpkkvUlxNcRPdUv/1h89/W9lsBdb8U0Pc7AUK/EmD0GwFKvxDg9HMBUj8WYPVTAVo/FOD1MwFiPxJg9hMBaj8Q4Pb3BThv7fwD8xegXsnWAZfUX7lo+VOgrGTLn4KfR6WVbPl74PtRbSVb/ib8elRcyZZ/Cz4fVVey5V/Dj6PySrZ8P/B+VF/Jlu+I3o4OrGTL94SvR0dWsuW74rOSnZXsrGRnJTsrWfemvnclEy5E7t+6kikC9P5tK5kkYKB/y0qmCRjpj69kooCh/uhKpgoY64+tZLKAwf7ISqYLNlcyS5CuZJogXMk0QbiSaYJwJdME4UqmCcKVTBOEK5kmCFcyTRCuZJogXMk0QbiSaYJwJZt9HMABHMABHMDjgBcBBgDumC13J7DAiQAAAABJRU5ErkJggg==); }
+		div.toolbar > button i {
+			display: inline-block;
+			font-style: normal;
+			transform: rotate(90deg);
+			vertical-align: text-bottom;
+
+			display: none;
+
+		}
+		div.toolbar > button span {
+			display: inline-block;
+			font-size: 0.3em;
+			position: absolute;
+			margin-top: 19px;
+			margin-left: -4px;
+
+			display: none;
+
+		}
+		@media print {
+			* { color: #000; }
+			body { text-shadow: none; }
+			img { box-shadow: none; }
+			.wrapper { max-width: 30em; }
+			div.toolbar,
+			div#extra { display: none; }
+			@page { size: auto; margin: 0; }
+		}
+		a:hover .xbr::after { color: inherit; }
+		.xbr::after {
+			display: block;
+			color: #C9F;
+			content: 'ARKORE.ITCH.IO/TR12';
+			font-size: 0.67em;
+		}
+		iframe { margin: 0 auto; }
+		iframe.game { width: 29em; height: 16em; }
+	</style>
+</head>
+
+<body>
+	<div class="wrapper" style="background-image: radial-gradient(ellipse at center, #1c191f 0%, transparent 100%); /* background-attachment: fixed; */">
+		<h1>
+			<a href="https://arkore.itch.io/tr12" title="TR-12 Game banner.">
+				<img src="index.jpg" title="TR-12 PC Game for Windows" alt="TR-12 Game Box cover art" width="729" height="348"><br>
+			</a>
+			<a href="https://arkore.itch.io/tr12" title="TR-12 Game">
+				<span class="xbr">TR-12 PC Game ($9.99 USD) for Windows</span>
+			</a>
+		</h1>
+		<div style="text-align:center;margin:1em 0;color:#C93">&nbsp;</div>
+
+		<p style="text-align: center">[<a href="mailto:arkore@slipgate.ca">Contact Support</a>]</p>
+
+		<p style="text-align: center">[<a href="https://drive.google.com/file/d/13qfDmdt2QIV8hl57rj29pAmTj2xxS1hO/view" title="TR-12 game wallpaper">Wallpaper</a>]</p>
+
+		<p style="display:none"><b>February 1</b>, TR-12 PC game release, final version.</p>
+
+		<p style="display:none"><b>February 9</b>, TR-12 website.</p>
+
+		<p style="display:none;text-align:center;margin:2em 0">You've reached the end of this page.</p>
+
+		<div style="text-align:center; margin: 5em 0;">
+			<iframe class="embed" frameborder="0" src="https://itch.io/embed/2507374?dark=true" width="552" height="167"><a href="https://arkore.itch.io/tr12">TR-12 ($9.99 USD) by arkore</a></iframe>
+		</div>
+	</div>
+	<div id="extra">
+	</div>
+</body>
+<script>
+	function tr12(el) {
+		el.innerHTML = '<iframe class="game" frameborder="0" src="https://itch.io/embed-upload/9639533?color=111212" allowfullscreen="" width="640" height="380"><a href="https://arkore.itch.io/tr12">Play TR-12 ($9.99 USD) on itch.io</a></iframe>';
+	}
+
+	extra.innerHTML = `
+	<div class="wrapper" style="height:100vh">
+		<div class="toolbar">
+			<button tabindex="2" type="button" class="backward" onclick="window.scrollTo(0,window.pageYOffset-(window.innerHeight*2));"><i>⇠</i> <span>x2</span></button>
+			<button tabindex="3" type="button" class="forward" onclick="window.scrollTo(0,window.pageYOffset+(window.innerHeight*2));"><i>⇢</i> <span>x2</span></button>
+		</div>
+	</div>
+	`;
+</script>
+
+<script>
+	var u = null;
+	document.querySelectorAll('b').forEach(function(el) {
+		if (el.textContent.match(/^Jan|Feb|Mar|Apr|May|June|July|Aug|Sept|Oct|Nov|Dec/)) {
+			u = el;
+		}
+	});
+	u.innerHTML = '<a name="end">'+u.innerHTML+'</a>';
+	
+	var t = new Date(u.textContent.trim()+', '+(new Date()).getFullYear());
+	document.querySelector('h1 + div').innerHTML = '(updated '+timeSince(t)+' ago)';
+
+	document.querySelectorAll('p.archive').forEach(function(el) {
+		var el2 = el.querySelector('a');
+		var el3 = el.nextElementSibling;
+		el2.onclick = function(e) {
+			e.preventDefault();
+			el.classList.toggle('open');
+		};
+	});
+	
+	function timeSince(date) {
+		var seconds = Math.floor((new Date() - date) / 1000);
+		var interval = seconds / 31536000;
+		if (interval > 1) {
+			return Math.floor(interval) + " years";
+		}
+		interval = seconds / 2592000;
+		if (interval > 1) {
+			return Math.floor(interval) + " months";
+		}
+		interval = seconds / 86400;
+		if (interval > 1) {
+			return Math.floor(interval) + " days";
+		}
+		interval = seconds / 3600;
+		if (interval > 1) {
+			return Math.floor(interval) + " hours";
+		}
+		interval = seconds / 60;
+		if (interval > 1) {
+			return Math.floor(interval) + " min.";
+		}
+		return Math.floor(seconds) + " sec.";
+	}
+</script>
+</html>
