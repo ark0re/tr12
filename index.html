@@ -36,9 +36,11 @@
 			font-size: calc(0.8rem);
 			text-transform: uppercase;
 		}
-		h1 a {
+		h1 a[href],
+		h1 a[href]:link,
+		h1 a[href]:visited {
 			display: block;
-			color: #EEE !important;
+			color: #EEE;
 			text-align: center;
 		}
 		h1 img {
@@ -157,10 +159,10 @@
 			div#extra { display: none; }
 			@page { size: auto; margin: 0; }
 		}
-		a:hover .xbr::after { color: inherit; }
+		a[href].link2 { text-decoration: underline}
+		a[href].link2:hover { color: #5f6; }
 		.xbr::after {
 			display: block;
-			color: #C9F;
 			content: 'ARKORE.ITCH.IO/TR12';
 			font-size: 0.67em;
 		}
@@ -175,7 +177,7 @@
 			<a href="https://arkore.itch.io/tr12" title="TR-12 Game banner.">
 				<img src="index.jpg" title="TR-12 PC Game for Windows" alt="TR-12 Game Box cover art" width="729" height="348"><br>
 			</a>
-			<a href="https://arkore.itch.io/tr12" title="TR-12 Game">
+			<a class="link2" href="https://arkore.itch.io/tr12" title="TR-12 Game">
 				<span class="xbr">TR-12 PC Game ($9.99 USD) for Windows</span>
 			</a>
 		</h1>
